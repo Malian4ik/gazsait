@@ -1,0 +1,120 @@
+.note {
+  font-size: 0.9rem;
+  color: var(--text-3);
+  max-width: 480px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover {
+  border-color: var(--border-h);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+
+.featured {
+  border-color: rgba(124,92,252,0.45);
+  background: linear-gradient(145deg, rgba(124,92,252,0.1) 0%, rgba(79,156,249,0.04) 100%);
+}
+.featured:hover { box-shadow: 0 20px 52px rgba(124,92,252,0.25); }
+
+.featuredBadge {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 0 0 12px 12px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-top: 8px; /* clear badge */
+  margin-bottom: 20px;
+}
+
+.planName {
+  display: block;
+  font-family: var(--font-h);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.planDesc {
+  display: block;
+  font-size: 0.83rem;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.price {
+  font-family: var(--font-h);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-lt);
+  white-space: nowrap;
+  text-align: right;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 20px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  flex: 1;
+  margin-bottom: 28px;
+}
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+.checkIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.cta { width: 100%; margin-top: auto; }
+
+@media (min-width: 700px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}

@@ -1,0 +1,115 @@
+.header { max-width: 640px; }
+
+/* Scrollable track on mobile */
+.track {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 0 var(--gutter);
+}
+.track::-webkit-scrollbar { display: none; }
+
+.cards {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  padding-bottom: 8px; /* space for shadow */
+}
+
+/* Card */
+.card {
+  width: 280px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover {
+  border-color: var(--border-h);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45), 0 0 0 1px var(--border-h);
+}
+
+/* Card image */
+.cardImg {
+  position: relative;
+  height: 188px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.img {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: brightness(0.88);
+}
+.card:hover .img { transform: scale(1.04); }
+
+.cardTag {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(8,8,14,0.75);
+  border: 1px solid var(--border-h);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* Card body */
+.cardBody {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.cardTitle {
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  flex: 1;
+}
+.cardFor {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-lt);
+  margin-top: 4px;
+}
+
+/* Desktop: grid */
+@media (min-width: 900px) {
+  .track {
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+  .cardsRest {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+  }
+  .card { width: 100%; }
+}
+
+@media (min-width: 1100px) {
+  .cardImg { height: 210px; }
+}

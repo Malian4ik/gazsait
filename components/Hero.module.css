@@ -1,0 +1,152 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bgWrap {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.bgImg {
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.75) brightness(0.85);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8,8,14,0.45) 0%,
+    rgba(8,8,14,0.3)  35%,
+    rgba(8,8,14,0.72) 75%,
+    rgba(8,8,14,1)    100%
+  );
+  z-index: 1;
+}
+
+.gradientBloom {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 75% 55% at 40% 45%, rgba(124,92,252,0.14) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* Particles */
+.particles { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  bottom: -10px;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  8%   { opacity: 0.55; }
+  92%  { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-110vh) scale(1.3); }
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 3;
+  padding-top: clamp(80px, 15vh, 140px);
+  padding-bottom: clamp(80px, 12vh, 120px);
+}
+
+.eyebrow {
+  margin-bottom: 28px;
+  animation: fadeIn 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  flex-shrink: 0;
+  animation: blink 2.5s ease infinite;
+}
+@keyframes blink {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.5); }
+  50%       { box-shadow: 0 0 0 7px rgba(6,182,212,0); }
+}
+
+.headline {
+  max-width: 780px;
+  margin-bottom: 28px;
+  white-space: pre-line;
+}
+
+/* Value pills */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 44px;
+}
+.pill {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-2);
+  padding: 7px 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
+}
+
+/* CTAs */
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.ctaPrimary {
+  background: var(--accent);
+}
+
+/* Scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 36px;
+  right: clamp(20px, 4vw, 48px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  writing-mode: vertical-rl;
+}
+.scrollLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.scrollLine {
+  width: 1px;
+  height: 54px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50%       { transform: scaleY(0.5); opacity: 0.4; }
+}
+
+@media (max-width: 600px) {
+  .ctas { flex-direction: column; }
+  .ctas .btn { width: 100%; }
+  .scrollIndicator { display: none; }
+}

@@ -1,0 +1,62 @@
+.section { background: var(--surface); }
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  padding: 28px 28px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+  transition: border-color var(--dur), transform var(--dur), box-shadow var(--dur);
+}
+.card:hover {
+  border-color: var(--border-h);
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.3);
+}
+
+.badge {
+  position: absolute;
+  top: 0; right: 24px;
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px 8px;
+  border-radius: 0 0 10px 10px;
+}
+
+.offerTag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-lt);
+}
+
+.offerTitle { line-height: 1.25; }
+
+.offerDesc {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.valid {
+  font-size: 0.78rem;
+  color: var(--text-3);
+  margin-top: auto;
+}
+
+@media (min-width: 600px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .cards { grid-template-columns: repeat(3, 1fr); } }

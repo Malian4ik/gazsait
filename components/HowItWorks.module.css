@@ -1,0 +1,89 @@
+.section { background: var(--surface); }
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  position: relative;
+}
+
+.stepIconWrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--border-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: border-color var(--dur), box-shadow var(--dur), background var(--dur);
+  flex-shrink: 0;
+}
+.step:hover .stepIconWrap {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 28px rgba(124,92,252,0.3);
+}
+
+.stepNum {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-h);
+  font-size: 0.68rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Connector line between steps (desktop) */
+.connector { display: none; }
+
+.stepTitle { margin-top: 4px; }
+.stepDesc {
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 220px;
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 700px) {
+  .steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    align-items: start;
+    padding-top: 32px;
+  }
+
+  .step { padding: 0 16px; }
+
+  .connector {
+    display: block;
+    position: absolute;
+    top: 36px;
+    left: calc(50% + 36px);
+    width: calc(100% - 72px);
+    height: 1px;
+    background: linear-gradient(to right, var(--border-h) 0%, var(--border) 100%);
+    border: none;
+  }
+
+  .stepDesc { max-width: unset; }
+}
