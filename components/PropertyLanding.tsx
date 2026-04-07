@@ -1,4 +1,5 @@
 import styles from '@/app/page.module.css'
+import SmartAction from '@/components/SmartAction'
 import type { LandingContent } from '@/lib/landingData'
 
 type PropertyLandingProps = {
@@ -6,20 +7,23 @@ type PropertyLandingProps = {
 }
 
 export default function PropertyLanding({ content }: PropertyLandingProps) {
+  const pageUrl = `https://gazsait.vercel.app${content.path === '/' ? '' : content.path}`
+  const isResidential = content.path === '/'
+
   const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'WebSite',
         name: content.siteTitle,
-        url: `http://localhost:3000${content.path === '/' ? '' : content.path}`,
+        url: pageUrl,
         description: content.pageDescription,
         inLanguage: 'ru-RU',
       },
       {
         '@type': 'Organization',
         name: content.siteTitle,
-        url: `http://localhost:3000${content.path === '/' ? '' : content.path}`,
+        url: pageUrl,
         description: content.pageDescription,
       },
     ],
@@ -34,46 +38,50 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
 
       <section className={styles.heroShell}>
         <header className={styles.header}>
-          <a className={styles.brand} href="#top" aria-label={`${content.siteTitle}, перейти в начало страницы`}>
+          <SmartAction
+            className={styles.brand}
+            href="#top"
+            ariaLabel={`${content.siteTitle}, перейти в начало страницы`}
+          >
             <span className={styles.brandMark}>S</span>
             <div>
               <strong>{content.siteTitle}</strong>
-              <span>{content.path === '/' ? 'Комфортная аренда без лишней суеты' : 'Коммерческая аренда без хаоса'}</span>
+              <span>{isResidential ? 'Комфортная аренда без лишней суеты' : 'Коммерческая аренда без хаоса'}</span>
             </div>
-          </a>
+          </SmartAction>
 
           <nav className={styles.nav} aria-label="Главная навигация">
-            <a href={content.path === '/' ? '#search' : '/'}>Жилая аренда</a>
-            <a href={content.path === '/commercial' ? '#search' : '/commercial'}>Коммерческая аренда</a>
-            <a href="#homes">Подборки</a>
-            <a href="#owners">Собственникам</a>
+            <SmartAction href="/">Жилая аренда</SmartAction>
+            <SmartAction href="/commercial">Коммерческая аренда</SmartAction>
+            <SmartAction href="#homes">Подборки</SmartAction>
+            <SmartAction href="#owners">Собственникам</SmartAction>
           </nav>
 
           <div className={styles.headerActions}>
-            <a className={styles.secondaryButton} href="#owners">
+            <SmartAction className={styles.secondaryButton} href={content.secondaryHref}>
               {content.secondaryCta}
-            </a>
-            <a className={styles.primaryButton} href={content.primaryHref}>
+            </SmartAction>
+            <SmartAction className={styles.primaryButton} href={content.primaryHref}>
               {content.primaryCta}
-            </a>
+            </SmartAction>
           </div>
         </header>
 
         <div className={styles.mobileSwitcher} aria-label="Переключение между типами недвижимости">
-          <a
-            className={`${styles.mobileSwitcherLink} ${content.path === '/' ? styles.mobileSwitcherLinkActive : ''}`}
+          <SmartAction
+            className={`${styles.mobileSwitcherLink} ${isResidential ? styles.mobileSwitcherLinkActive : ''}`}
             href="/"
           >
             Жилая аренда
-          </a>
-          <a
+          </SmartAction>
+          <SmartAction
             className={`${styles.mobileSwitcherLink} ${
               content.path === '/commercial' ? styles.mobileSwitcherLinkActive : ''
             }`}
             href="/commercial"
           >
             Коммерческая аренда
-          </a>
+          </SmartAction>
         </div>
 
         <div className={`${styles.hero} ${content.pageKind === 'commercial' ? styles.heroCommercial : ''}`} id="top">
@@ -83,12 +91,12 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
             <p>{content.heroText}</p>
 
             <div className={styles.heroActions}>
-              <a className={styles.primaryButton} href={content.primaryHref}>
+              <SmartAction className={styles.primaryButton} href={content.primaryHref}>
                 {content.primaryCta}
-              </a>
-              <a className={styles.secondaryButton} href={content.secondaryHref}>
+              </SmartAction>
+              <SmartAction className={styles.secondaryButton} href={content.secondaryHref}>
                 {content.secondaryCta}
-              </a>
+              </SmartAction>
             </div>
 
             <div className={styles.heroStats}>
@@ -132,9 +140,9 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-                <a className={styles.primaryButton} href="#homes">
+                <SmartAction className={styles.primaryButton} href="#homes">
                   Показать варианты
-                </a>
+                </SmartAction>
               </div>
             </div>
           </div>
@@ -180,12 +188,12 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
                   <span>{listing.details}</span>
                 </div>
                 <div className={styles.listingActions}>
-                  <a className={styles.primaryButton} href="#cta">
+                  <SmartAction className={styles.primaryButton} href="#cta">
                     Записаться на просмотр
-                  </a>
-                  <a className={styles.inlineLink} href="#faq">
+                  </SmartAction>
+                  <SmartAction className={styles.inlineLink} href="#faq">
                     Подробнее об условиях
-                  </a>
+                  </SmartAction>
                 </div>
               </div>
             </article>
@@ -203,9 +211,9 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
                 <li key={step}>{step}</li>
               ))}
             </ol>
-            <a className={styles.primaryButton} href={content.primaryHref}>
+            <SmartAction className={styles.primaryButton} href={content.primaryHref}>
               {content.primaryCta}
-            </a>
+            </SmartAction>
           </article>
 
           <article className={`${styles.flowPanel} ${styles.ownerPanel}`} id="owners">
@@ -216,9 +224,9 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
                 <li key={step}>{step}</li>
               ))}
             </ol>
-            <a className={styles.secondaryButton} href="#cta">
-              {content.path === '/' ? 'Разместить квартиру' : 'Разместить объект'}
-            </a>
+            <SmartAction className={styles.secondaryButton} href="#cta">
+              {isResidential ? 'Разместить квартиру' : 'Разместить объект'}
+            </SmartAction>
           </article>
         </div>
       </section>
@@ -264,23 +272,23 @@ export default function PropertyLanding({ content }: PropertyLandingProps) {
           </div>
 
           <div className={styles.ctaActions}>
-            <a className={styles.primaryButton} href={content.primaryHref}>
+            <SmartAction className={styles.primaryButton} href={content.primaryHref}>
               {content.primaryCta}
-            </a>
-            <a className={styles.secondaryButton} href={content.secondaryHref}>
+            </SmartAction>
+            <SmartAction className={styles.secondaryButton} href={content.secondaryHref}>
               {content.secondaryCta}
-            </a>
+            </SmartAction>
           </div>
         </div>
       </section>
 
       <div className={styles.mobileDock}>
-        <a className={styles.primaryButton} href={content.primaryHref}>
-          {content.path === '/' ? 'Найти жилье' : 'Найти объект'}
-        </a>
-        <a className={styles.secondaryButton} href={content.secondaryHref}>
+        <SmartAction className={styles.primaryButton} href={content.primaryHref}>
+          {isResidential ? 'Найти жилье' : 'Найти объект'}
+        </SmartAction>
+        <SmartAction className={styles.secondaryButton} href={content.secondaryHref}>
           Разместить
-        </a>
+        </SmartAction>
       </div>
     </main>
   )
